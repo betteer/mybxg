@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="template-web.js"></script>
+  <script type="text/javascript">
+    /*
+    模板引擎的作用：模板+数据->静态html片段
+
+    */
+  </script>
+</head>
+<body>
+  <div>水果列表</div>
+  <div id="fruitList"></div>
+
+  <script type="text/javascript">
+    /*
+      渲染模板有两种方式：
+      1、基于模板
+      2、基于字符串形式的模板
+    */
+    var tpl = '<ul>'
+              +'  {{if list}}'
+              +'    {{each list}}'
+              +'      <li>{{$index + 1}}==========={{$value.cname + "-------" + $value.ename}}</li>'
+              +'    {{/each}}'
+              +'  {{else}}'
+              +'    <li>没有数据</li>'
+              +'  {{/if}}'
+              +'</ul>';
+
+    var data = {
+      list : [{ename:'apple',cname:'苹果'},{ename:'orange',cname:'橘子'},{ename:'banana',cname:'香蕉'}]
+    }
+    // 通用做法
+    // var html = template('tpl',data);
+    // 3.0的做法
+    // var render = template.compile(tpl);
+    // var html = render(data);
+    // 4.12的做法
+    var html = template.render(tpl,data);
+
+    $('#fruitList').html(html);
+  </script>
+</body>
+</html>
